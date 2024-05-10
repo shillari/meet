@@ -91,3 +91,8 @@ An APP to search upcoming events around you.
     <br/>Given the main page is open;
     <br/>When user click in the option to view a chart of upcoming events in each city;
     <br/>Then a chart with the number of upcoming events in each city is shown.
+
+
+## External API & Serverless authentication
+This application utilizes Google Calendar API to retrieve current public events to the user.
+<br />The Google Calendar API is a protected resource that mandates a valid OAuth2 token for access. To enable user authorization and access to the Google Calendar API, the application utilizes serverless functions created using [AWS Lambda](https://aws.amazon.com/lambda/), a cloud-service provider. These serverless functions are responsible for obtaining a valid access token from the [Google OAuth](https://developers.google.com/identity/protocols/oauth2) service.
