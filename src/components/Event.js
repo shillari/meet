@@ -8,8 +8,9 @@ const Event = ({ event }) => {
       {event &&
         <div>
           <h1>{event.summary}</h1>
-          <p>{event.created}</p>
           <p>{event.location}</p>
+          <p>{event.created}</p>
+
           {showDetails &&
             <p id="details">{event.description}</p>
           }
