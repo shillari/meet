@@ -1,7 +1,13 @@
 import { useState } from "react";
 
-const NumberOfEvents = () => {
+const NumberOfEvents = ({ setCurrentNOE }) => {
   const [query, setQuery] = useState('32');
+
+  const handleInputChanged = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    setCurrentNOE(value);
+  }
 
   return (
     <div id="number-events-search">
@@ -10,7 +16,7 @@ const NumberOfEvents = () => {
         className="number-events"
         placeholder="number of events"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleInputChanged}
       />
     </div>
   );
