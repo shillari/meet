@@ -2,7 +2,6 @@
 
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { fireEvent } from '@testing-library/react';
 import { getEvents } from '../api';
 import Tab from '../components/Tab';
 
@@ -13,11 +12,13 @@ describe('<Tab /> component', () => {
   });
 
   test('citySearch should be hide as default', () => {
-    expect(tabComponent.querySelector('#city-search')).not.toBeInTheDocument();
+    expect(screen.getByTestId('filter-div')).toHaveClass('filter-options inactive');
+    expect(tabComponent.querySelector('#city-search')).toBeInTheDocument();
   });
 
   test('numberOfEvents should be hide as default', () => {
-    expect(tabComponent.querySelector('#number-events-search')).not.toBeInTheDocument();
+    expect(screen.getByTestId('filter-div')).toHaveClass('filter-options inactive');
+    expect(tabComponent.querySelector('#number-events-search')).toBeInTheDocument();
   });
 
   test('renders list of events in default tab', () => {
@@ -42,8 +43,7 @@ describe('<Tab /> component', () => {
 
     await user.click(filter);
 
-    expect(tabComponent.querySelector('#city-search')).toBeInTheDocument();
-    expect(tabComponent.querySelector('#number-events-search')).toBeInTheDocument();
+    expect(screen.getByTestId('filter-div')).toHaveClass('filter-options active');
   });
 
   test('user can hide filter', async () => {
@@ -52,13 +52,11 @@ describe('<Tab /> component', () => {
 
     await user.click(filter);
 
-    expect(tabComponent.querySelector('#city-search')).toBeInTheDocument();
-    expect(tabComponent.querySelector('#number-events-search')).toBeInTheDocument();
+    expect(screen.getByTestId('filter-div')).toHaveClass('filter-options active');
 
     await user.click(filter);
 
-    expect(tabComponent.querySelector('#city-search')).not.toBeInTheDocument();
-    expect(tabComponent.querySelector('#number-events-search')).not.toBeInTheDocument();
+    expect(screen.getByTestId('filter-div')).toHaveClass('filter-options inactive');
   });
 
   test('renders default tab button active', () => {

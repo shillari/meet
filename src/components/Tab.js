@@ -60,9 +60,10 @@ const Tab = () => {
         {activeTab === 'tab1' && (
           <div className="tab-pane active" id="tab1">
             <button onClick={handleFilterClick} className='filter-button'>Filter {filter ? <IoIosArrowUp /> : <IoIosArrowDown />}</button>
-            {filter ? <><CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
-              <NumberOfEvents setCurrentNOE={setCurrentNOE} /></>
-              : null}
+            <div className={filter ? 'filter-options active' : 'filter-options inactive'} data-testid="filter-div">
+              <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
+              <NumberOfEvents setCurrentNOE={setCurrentNOE} />
+            </div>
             <EventList events={events} />
           </div>
         )}
