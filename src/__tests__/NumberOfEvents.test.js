@@ -10,10 +10,8 @@ describe('<NumberOfEvents /> component', () => {
   })
 
   test(('renders text input'), () => {
-    const slider = NumberOfEventComponent.container.firstChild.querySelector('input[type="range"]')
     const searchBox = NumberOfEventComponent.queryByRole('spinbutton');
 
-    expect(slider).toBeInTheDocument();
     expect(searchBox).toBeInTheDocument();
     expect(searchBox).toHaveClass('number-events');
   });

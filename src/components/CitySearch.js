@@ -57,7 +57,7 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
         />
       </div>
       {showSuggestions ?
-        <div style={{ overflowY: 'scroll', height: '150px' }} className="suggestions-div">
+        <div style={{ overflowY: 'scroll', height: '200px' }} className="suggestions-div">
           <ul className="suggestions">
             <li onClick={handleItemClicked} key='See all cities'>
               <b>See all cities</b>

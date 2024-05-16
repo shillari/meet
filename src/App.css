@@ -161,39 +161,22 @@ input[type="number"] {
   border-radius: 0;
   border: none;
   border-bottom: 2px solid var(--primary-color);
-  transition: border-bottom .35s ease-in-out;
+}
+
+#number-events-search input:focus {
+  border-bottom: 3px solid var(--primary-color) !important;
+  width: 150px;
 }
 
 #number-events-search input {
-  width: 250px;
-  max-width: 250px;
+  width: 50px;
+  max-width: 150px;
   appearance: textfield;
   background: none;
   border-radius: 0;
-  border: none;
-  border-bottom: 2px solid var(--primary-color);
-  transition: border-bottom .35s ease-in-out;
-}
-
-#number-events-search input:nth-child(1){
-  appearance: none;
-  border: none;
-  max-width: 200px;
-  height: 2px;
-  background: var(--primary-color);
-}
-
-#number-events-search input:last-child {
-  border: none;
-  max-width: 50px;
-  background-color: var(--secondary-color);
-  padding: 1px 4px 1px;
-  margin-left: 3px;
-  height: 25px;
-}
-
-#city-search input:focus{
-  border-bottom: 3px solid var(--primary-color);
+  border: none !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+  transition: width .35s ease-in-out;
 }
 
 /*
