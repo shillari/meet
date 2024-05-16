@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { IoLocationOutline } from "react-icons/io5";
+import { IoCalendarOutline } from "react-icons/io5";
 
 const Event = ({ event }) => {
   const [showDetails, setShowDetails] = useState(false);
@@ -6,15 +8,15 @@ const Event = ({ event }) => {
   return (
     <li>
       {event &&
-        <div>
+        <div className="event-content">
           <h1>{event.summary}</h1>
-          <p>{event.location}</p>
-          <p>{event.created}</p>
+          <p><IoLocationOutline /> {event.location}</p>
+          <p><IoCalendarOutline /> {event.created}</p>
 
           {showDetails &&
             <p id="details">{event.description}</p>
           }
-          <button onClick={() => setShowDetails(!showDetails)}>
+          <button className="detail-btn" onClick={() => setShowDetails(!showDetails)}>
             {showDetails ?
               "hide details" : "show details"}
           </button>

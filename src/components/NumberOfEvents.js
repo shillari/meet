@@ -11,13 +11,24 @@ const NumberOfEvents = ({ setCurrentNOE }) => {
 
   return (
     <div id="number-events-search">
-      <input
-        type="text"
-        className="number-events"
-        placeholder="number of events"
-        value={query}
-        onChange={handleInputChanged}
-      />
+      <label>Number of events: </label>
+      <div>
+        <input
+          type="range"
+          min={0} max={100}
+          className="number-events"
+          value={query}
+          onChange={handleInputChanged}
+        />
+        <input
+          type="number"
+          min={0}
+          className="number-events"
+          placeholder="events"
+          value={query}
+          onChange={handleInputChanged}
+        />
+      </div>
     </div>
   );
 }

@@ -4,6 +4,7 @@ import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CitySearch from '../components/CitySearch';
 import App from '../App';
+import Tab from '../components/Tab';
 import { extractLocations, getEvents } from '../api';
 
 describe('<CitySearch /> component', () => {
@@ -94,15 +95,40 @@ describe('<CitySearch /> component', () => {
 
     expect(cityTextBox).toHaveValue(BerlinGermanySuggestion.textContent);
   });
+
+  test('handles empty input correctly', async () => {
+    const user = userEvent.setup();
+    const allEvents = await getEvents();
+    const allLocations = extractLocations(allEvents);
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+
+    // user clears the input
+    const cityTextBox = CitySearchComponent.queryByRole('textbox');
+    await user.clear(cityTextBox);
+
+    const suggestions = CitySearchComponent.queryAllByRole('listitem');
+    expect(suggestions).toHaveLength(allLocations.length + 1);
+  });
+
+  test('handles case when allLocations is null or undefined', async () => {
+    CitySearchComponent.rerender(<CitySearch allLocations={null} />);
+    const cityTextBox = CitySearchComponent.queryByRole('textbox');
+    await userEvent.click(cityTextBox);
+
+    const suggestionListItems = CitySearchComponent.queryAllByRole('listitem');
+    expect(suggestionListItems).toHaveLength(1);
+  });
 });
 
 describe('<CitySearch /> integration', () => {
   test('renders suggestions list when the app is rendered.', async () => {
     const user = userEvent.setup();
-    const AppComponent = render(<App />);
-    const AppDOM = AppComponent.container.firstChild;
+    const TabComponent = render(<Tab />).container.firstChild;
+    const filter = TabComponent.querySelector('.filter-button');
 
-    const CitySearchDOM = AppDOM.querySelector('#city-search');
+    await user.click(filter);
+
+    const CitySearchDOM = TabComponent.querySelector('#city-search');
     const cityTextBox = within(CitySearchDOM).queryByRole('textbox');
     await user.click(cityTextBox);
 

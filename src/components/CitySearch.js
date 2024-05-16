@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { CiLocationOn } from "react-icons/ci";
 
 const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
@@ -28,16 +29,21 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
 
   return (
     <div id="city-search">
-      <input
-        type="text"
-        className="city"
-        placeholder="Search for a city"
-        value={query}
-        onFocus={() => setShowSuggestions(true)}
-        onChange={handleInputChanged}
-      />
+      <label>City: </label>
+      <div className="input-city">
+
+        <CiLocationOn />
+        <input
+          type="text"
+          className="city"
+          placeholder="Search for a city"
+          value={query}
+          onFocus={() => setShowSuggestions(true)}
+          onChange={handleInputChanged}
+        />
+      </div>
       {showSuggestions ? <ul className="suggestions">
-        {suggestions.map((suggestion) => {
+        {suggestions && suggestions.map((suggestion) => {
           return <li onClick={handleItemClicked} key={suggestion}>{suggestion}</li>
         })}
         <li onClick={handleItemClicked} key='See all cities'>
