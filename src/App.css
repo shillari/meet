@@ -106,7 +106,8 @@ input[type="number"] {
   position: relative;
 }
 
-.suggestions {
+.suggestions,
+.suggestions-div {
   background-color: var(--primary-color);
   width: 270px;
   position: absolute;
@@ -116,7 +117,14 @@ input[type="number"] {
   margin: 0;
   font-size: 14px;
   box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
+  overflow: scroll;
   animation: show_suggestion .6s normal ease;
+  font-size: 16px;
+}
+
+.suggestions {
+  top: 0;
+  height: 100%;
 }
 
 .suggestions li {

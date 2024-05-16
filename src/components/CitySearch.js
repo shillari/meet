@@ -27,6 +27,20 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
     setCurrentCity(value);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Escape') {
+      setShowSuggestions(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
+
   return (
     <div id="city-search">
       <label>City: </label>
@@ -42,14 +56,17 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
           onChange={handleInputChanged}
         />
       </div>
-      {showSuggestions ? <ul className="suggestions">
-        {suggestions && suggestions.map((suggestion) => {
-          return <li onClick={handleItemClicked} key={suggestion}>{suggestion}</li>
-        })}
-        <li onClick={handleItemClicked} key='See all cities'>
-          <b>See all cities</b>
-        </li>
-      </ul> : null}
+      {showSuggestions ?
+        <div style={{ overflowY: 'scroll', height: '150px' }} className="suggestions-div">
+          <ul className="suggestions">
+            <li onClick={handleItemClicked} key='See all cities'>
+              <b>See all cities</b>
+            </li>
+            {suggestions && suggestions.map((suggestion) => {
+              return <li onClick={handleItemClicked} key={suggestion}>{suggestion}</li>
+            })}
+          </ul>
+        </div> : null}
     </div>
   );
 }
