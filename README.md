@@ -14,13 +14,16 @@ An APP to search upcoming events around you.
 
   - Scenario 2: User should see a list of suggestions when they search for a city.
     <br/>Given the main page is open;
+    <br/>And user enables to show filters;
     <br/>When user starts typing in the city textbox;
     <br/>Then the user should receive a list of cities (suggestions) that match what they’ve typed.
 
   - Scenario 3: User can select a city from the suggested list.	
-    <br/>Given user was typing “Berlin” in the city textbox AND the list of suggested cities is showing;
+    <br/>Given user was typing “Berlin” in the city textbox;
+    <br/>And the list of suggested cities is showing;
     <br/>When the user selects a city (e.g., “Berlin, Germany”) from the list;
-    <br/>Then their city should be changed to that city (i.e., “Berlin, Germany”) AND the user should receive a list of upcoming events in that city.
+    <br/>Then their city should be changed to that city (i.e., “Berlin, Germany”);
+    <br/>And the user should receive a list of upcoming events in that city.
 
 - Feature 2: Show/Hide Event Details
     <br/>__As a__ user,
@@ -49,12 +52,13 @@ An APP to search upcoming events around you.
 
   - Scenario 1: When user hasn’t specified a number, 32 events are shown by default.
     <br/>Given the main page is open;
-    <br/>When user hasn't spcified a number of events to show;
+    <br/>When user hasn't specified a number of events to show;
     <br/>Then 32 events are shown;
 
   - Scenario 2: User can change the number of events displayed.
     <br/>Given the main page is open;
-    <br/>When the user enter the number of events to show;
+    <br/>And user clicks to enable filters display;
+    <br/>When the user enters the number of events to show;
     <br/>Then the number of event entered by the user is shown.
 
 - Feature 4: Use the App When Offline
@@ -92,6 +96,25 @@ An APP to search upcoming events around you.
     <br/>When user click in the option to view a chart of upcoming events in each city;
     <br/>Then a chart with the number of upcoming events in each city is shown.
 
+- Feature 7: User can show/hide filters.
+  <br/>__As a__ user,
+  <br/>__I should be able to__ show/hide filters,
+  <br/>__So that__ I can see only the upcoming events.
+
+  - Scenario 1: Filters should be hide as default
+    <br/>Given the main is open;
+    <br/>When user has not click to show filters;
+    <br/>Then the filters are not shown.
+
+  - Scenario 2: User can enable filters display.
+    <br/>Given the main is open;
+    <br/>When user clicks on the filter button;
+    <br/>Then the filters are shown.
+
+  - Scenario 3: User can disable filters display.
+    <br/>Given the filters are shown;
+    <br/>When user clicks on the filter button;
+    <br/>Then the filters are hidden.
 
 ## External API & Serverless authentication
 This application utilizes Google Calendar API to retrieve current public events to the user.
