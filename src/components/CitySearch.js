@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { CiLocationOn } from "react-icons/ci";
 
 const CitySearch = ({ allLocations, setCurrentCity }) => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     setSuggestions(allLocations);
@@ -33,11 +34,19 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (containerRef.current && !containerRef.current.contains(event.target)) {
+      setShowSuggestions(false);
+    }
+  };
+
   useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleKeyPress);
 
     return () => {
       document.removeEventListener('keydown', handleKeyPress);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -57,8 +66,8 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
         />
       </div>
       {showSuggestions ?
-        <div style={{ overflowY: 'scroll', height: '200px' }} className="suggestions-div">
-          <ul className="suggestions">
+        <>
+          <ul ref={containerRef} className="suggestions">
             <li onClick={handleItemClicked} key='See all cities'>
               <b>See all cities</b>
             </li>
@@ -66,7 +75,7 @@ const CitySearch = ({ allLocations, setCurrentCity }) => {
               return <li onClick={handleItemClicked} key={suggestion}>{suggestion}</li>
             })}
           </ul>
-        </div> : null}
+        </> : null}
     </div>
   );
 }
