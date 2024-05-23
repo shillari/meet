@@ -69,6 +69,7 @@ const CitySearch = ({ allLocations, setCurrentCity, setInfoAlert }) => {
           placeholder="Search for a city"
           value={query}
           onFocus={() => setShowSuggestions(true)}
+          onClick={() => setShowSuggestions(true)}
           onChange={handleInputChanged}
         />
       </div>
