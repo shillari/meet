@@ -1,12 +1,25 @@
 import { useState } from "react";
 
-const NumberOfEvents = ({ setCurrentNOE }) => {
+const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
   const [query, setQuery] = useState('32');
 
   const handleInputChanged = (e) => {
     const value = e.target.value;
     setQuery(value);
-    setCurrentNOE(value);
+
+    setErrorAlert('');
+
+    if (!isPositiveInteger(value)) {
+      setErrorAlert('Only positive numbers are allowed');
+      setCurrentNOE(0);
+    } else {
+      setCurrentNOE(value);
+    }
+  }
+
+  function isPositiveInteger(value) {
+    const number = Number(value);
+    return Number.isInteger(number) && number > 0;
   }
 
   return (

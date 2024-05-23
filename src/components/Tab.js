@@ -9,6 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoFileTrayFullOutline } from "react-icons/io5";
 import { VscGraph } from "react-icons/vsc";
+import { ErrorAlert, InfoAlert } from './Alert';
 
 const Tab = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -17,6 +18,8 @@ const Tab = () => {
   const [allLocations, setAllLocations] = useState([]);
   const [currentCity, setCurrentCity] = useState("See all cities");
   const [filter, setFilter] = useState(false);
+  const [infoAlert, setInfoAlert] = useState('');
+  const [errorAlert, setErrorAlert] = useState('');
 
   const fetchData = async () => {
     const allEvents = await getEvents();
@@ -61,8 +64,18 @@ const Tab = () => {
           <div className="tab-pane active" id="tab1">
             <button onClick={handleFilterClick} className='filter-button'>Filter {filter ? <IoIosArrowUp /> : <IoIosArrowDown />}</button>
             <div className={filter ? 'filter-options active' : 'filter-options inactive'} data-testid="filter-div">
-              <CitySearch allLocations={allLocations} setCurrentCity={setCurrentCity} />
-              <NumberOfEvents setCurrentNOE={setCurrentNOE} />
+              <div className="alerts-container">
+                {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
+              </div>
+              <CitySearch allLocations={allLocations}
+                setCurrentCity={setCurrentCity}
+                setInfoAlert={setInfoAlert}
+              />
+              <div className="alerts-container">
+                {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
+              </div>
+              <NumberOfEvents setCurrentNOE={setCurrentNOE}
+                setErrorAlert={setErrorAlert} />
             </div>
             <EventList events={events} />
           </div>
