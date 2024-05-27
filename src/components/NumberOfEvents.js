@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
-  const [query, setQuery] = useState('32');
+  const NOEStored = localStorage.getItem('NOEfilter');
+  const [query, setQuery] = useState(NOEStored ? NOEStored : '32');
 
   const handleInputChanged = (e) => {
     const value = e.target.value;
     setQuery(value);
+    localStorage.setItem('NOEfilter', value);
 
     setErrorAlert('');
 

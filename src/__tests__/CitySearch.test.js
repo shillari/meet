@@ -107,7 +107,10 @@ describe('<CitySearch /> component', () => {
     const user = userEvent.setup();
     const allEvents = await getEvents();
     const allLocations = extractLocations(allEvents);
-    CitySearchComponent.rerender(<CitySearch allLocations={allLocations} />);
+    CitySearchComponent.rerender(<CitySearch allLocations={allLocations}
+      setCurrentCity={() => { }}
+      setInfoAlert={() => { }}
+    />);
 
     // user clears the input
     const cityTextBox = CitySearchComponent.queryByRole('textbox');

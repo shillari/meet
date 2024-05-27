@@ -2,8 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { CiLocationOn } from "react-icons/ci";
 
 const CitySearch = ({ allLocations, setCurrentCity, setInfoAlert }) => {
+  const cityStored = localStorage.getItem('cityFilter');
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(cityStored ? cityStored : '');
   const [suggestions, setSuggestions] = useState([]);
   const containerRef = useRef(null);
 
@@ -32,6 +33,7 @@ const CitySearch = ({ allLocations, setCurrentCity, setInfoAlert }) => {
     setQuery(value);
     setShowSuggestions(false); // to hide the list
     setCurrentCity(value);
+    localStorage.setItem('cityFilter', value);
     setInfoAlert('');
   };
 
