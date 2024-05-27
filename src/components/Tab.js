@@ -9,7 +9,7 @@ import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { IoFileTrayFullOutline } from "react-icons/io5";
 import { VscGraph } from "react-icons/vsc";
-import { ErrorAlert, InfoAlert } from './Alert';
+import { ErrorAlert, InfoAlert, WarningAlert } from './Alert';
 
 const Tab = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -20,6 +20,7 @@ const Tab = () => {
   const [filter, setFilter] = useState(false);
   const [infoAlert, setInfoAlert] = useState('');
   const [errorAlert, setErrorAlert] = useState('');
+  const [warningAlert, setWarningAlert] = useState('');
 
   const fetchData = async () => {
     const allEvents = await getEvents();
@@ -31,6 +32,7 @@ const Tab = () => {
   };
 
   useEffect(() => {
+    setWarningAlert(navigator.onLine ? '' : 'You are offline. The event list may not be up to date.');
     fetchData();
   }, [currentCity, currentNOE]);
 
@@ -45,6 +47,9 @@ const Tab = () => {
   return (
     <div id="tabs">
       <img src={logo} width={95} height={30.6} alt="logo name" />
+      <div className="alerts-container">
+        {warningAlert.length ? <WarningAlert text={warningAlert} /> : null}
+      </div>
       <div className="tab-header">
         <button
           className={`tab-link ${activeTab === 'tab1' ? 'active' : ''}`}
