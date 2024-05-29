@@ -4,6 +4,9 @@
 ## Deploy
 The application is current deployed at GitHub https://shillari.github.io/meet
 
+## Progressive Web Application (PWA)
+The application has been enhanced to function as a Progressive Web Application (PWA), allowing users to install it on their desktop or mobile devices and add it to their home screen. When installed, the app can operate with no internet connection, displaying the last retrieved list of events when the device was online.
+
 ## Features & Scenarios
 - Feature 1: Filter Events By City
     <br/>__As a__ user,
