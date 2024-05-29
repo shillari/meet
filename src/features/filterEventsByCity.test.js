@@ -45,7 +45,7 @@ defineFeature(feature, test => {
     when('user starts typing in the city textbox', async () => {
       CitySearchDOM = AppComponent.querySelector('#city-search');
       const citySearchInput = within(CitySearchDOM).queryByRole('textbox');
-      await user.type(citySearchInput, 'Berlin');
+      await user.type(citySearchInput, '{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}Berlin');
     });
 
     then('the user should recieve a list of cities (suggestions) that match what they’ve typed', () => {
@@ -70,7 +70,7 @@ defineFeature(feature, test => {
 
       CitySearchDOM = AppDOM.querySelector('#city-search');
       citySearchInput = within(CitySearchDOM).queryByRole('textbox');
-      await user.type(citySearchInput, "Berlin");
+      await user.type(citySearchInput, "{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}Berlin");
     });
 
     let suggestionListItems;

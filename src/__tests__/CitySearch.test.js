@@ -3,14 +3,15 @@
 import { render, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CitySearch from '../components/CitySearch';
-import App from '../App';
 import Tab from '../components/Tab';
 import { extractLocations, getEvents } from '../api';
 
 describe('<CitySearch /> component', () => {
   let CitySearchComponent;
   beforeEach(() => {
-    CitySearchComponent = render(<CitySearch allLocations={[]} />);
+    CitySearchComponent = render(<CitySearch
+      setCurrentCity={() => { }}
+      allLocations={[]} />);
   })
 
   test('renders text input', () => {
@@ -39,6 +40,7 @@ describe('<CitySearch /> component', () => {
     const allLocations = extractLocations(allEvents);
     CitySearchComponent.rerender(<CitySearch
       allLocations={allLocations}
+      setCurrentCity={() => { }}
       setInfoAlert={() => { }}
     />);
 
@@ -65,6 +67,7 @@ describe('<CitySearch /> component', () => {
     const allLocations = extractLocations(allEvents);
     CitySearchComponent.rerender(<CitySearch
       allLocations={allLocations}
+      setCurrentCity={() => { }}
       setInfoAlert={() => { }}
     />);
 
@@ -121,7 +124,9 @@ describe('<CitySearch /> component', () => {
   });
 
   test('handles case when allLocations is null or undefined', async () => {
-    CitySearchComponent.rerender(<CitySearch allLocations={null} />);
+    CitySearchComponent.rerender(<CitySearch
+      setCurrentCity={() => { }}
+      allLocations={null} />);
     const cityTextBox = CitySearchComponent.queryByRole('textbox');
     await userEvent.click(cityTextBox);
 

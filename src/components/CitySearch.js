@@ -4,13 +4,17 @@ import { CiLocationOn } from "react-icons/ci";
 const CitySearch = ({ allLocations, setCurrentCity, setInfoAlert }) => {
   const cityStored = localStorage.getItem('cityFilter');
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [query, setQuery] = useState(cityStored ? cityStored : '');
+  const [query, setQuery] = useState(cityStored ? cityStored : 'See all cities');
   const [suggestions, setSuggestions] = useState([]);
   const containerRef = useRef(null);
 
   useEffect(() => {
     setSuggestions(allLocations);
   }, [`${allLocations}`])
+
+  useEffect(() => {
+    setCurrentCity(query);
+  }, []);
 
   const handleInputChanged = (event) => {
     const value = event.target.value;

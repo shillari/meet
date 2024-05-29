@@ -116,7 +116,7 @@ describe('<Tab /> integration', () => {
     const CitySearchDOM = tabComponent.querySelector('#city-search');
     const CitySearchInput = within(CitySearchDOM).queryByRole('textbox');
 
-    await user.type(CitySearchInput, "Berlin");
+    await user.type(CitySearchInput, "{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}Berlin");
     const berlinSuggestionItem = within(CitySearchDOM).queryByText('Berlin, Germany');
     await user.click(berlinSuggestionItem);
 
@@ -124,6 +124,7 @@ describe('<Tab /> integration', () => {
     const allRenderedEventItems = within(EventListDOM).queryAllByRole('listitem');
 
     const allEvents = await getEvents();
+
     const berlinEvents = allEvents.filter(
       event => event.location === 'Berlin, Germany'
     );

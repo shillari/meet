@@ -1,11 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
   const NOEStored = localStorage.getItem('NOEfilter');
   const [query, setQuery] = useState(NOEStored ? NOEStored : '32');
 
+  useEffect(() => {
+    inputChanged(query);
+  }, []);
+
   const handleInputChanged = (e) => {
     const value = e.target.value;
+    inputChanged(value);
+  }
+
+  const inputChanged = (value) => {
     setQuery(value);
     localStorage.setItem('NOEfilter', value);
 
@@ -17,7 +25,7 @@ const NumberOfEvents = ({ setCurrentNOE, setErrorAlert }) => {
     } else {
       setCurrentNOE(value);
     }
-  }
+  };
 
   function isPositiveInteger(value) {
     const number = Number(value);
