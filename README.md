@@ -1,5 +1,8 @@
 # Meet
-An APP to search upcoming events around you.
+**Meet** is a web application developed using the Test Driven Development (TDD) approach. The objective of the app is to display tech events around the world, allowing users to choose the city and the number of events to display.
+
+## Deploy
+The application is current deployed at GitHub https://shillari.github.io/meet
 
 ## Features & Scenarios
 - Feature 1: Filter Events By City
@@ -119,3 +122,35 @@ An APP to search upcoming events around you.
 ## External API & Serverless authentication
 This application utilizes Google Calendar API to retrieve current public events to the user.
 <br />The Google Calendar API is a protected resource that mandates a valid OAuth2 token for access. To enable user authorization and access to the Google Calendar API, the application utilizes serverless functions created using [AWS Lambda](https://aws.amazon.com/lambda/), a cloud-service provider. These serverless functions are responsible for obtaining a valid access token from the [Google OAuth](https://developers.google.com/identity/protocols/oauth2) service.
+
+## Stack
+- React v18.3.1
+- Node v20.13.1
+- npm v10.4.0
+
+## Testing
+
+### Tools Used
+- **Unit and Integration Tests**: 
+  - [Jest](https://jestjs.io/)
+  - [@testing-library/jest-dom](https://github.com/testing-library/jest-dom) v5.17.0
+  - [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) v15.0.6
+  - [@testing-library/user-event](https://testing-library.com/docs/user-event/intro/) v14.5.2
+- **Acceptance Tests**:
+  - [jest-cucumber](https://www.npmjs.com/package/jest-cucumber) v4.4.0
+- **Automated Testing**:
+  - [Puppeteer](https://pptr.dev/) v18.1.0
+
+## Installation and Setup
+1. Download or clone the repository:
+   ```sh
+   git clone https://github.com/shillari/meet.git
+2. In a terminal in the project folder run locally (The application has mock data when running locally):
+   ```sh
+   npm start
+3. The application will open in your default browser.
+
+## Running Tests
+  After you clone the repository, in a terminal in the project folder you can run the tests:
+   ```sh
+   npm test
