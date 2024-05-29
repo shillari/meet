@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { getEvents, extractLocations } from '../api';
-import EventList from './EventList';
+//import EventList from './EventList';
+
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import '../App.css';
@@ -21,6 +22,7 @@ const Tab = () => {
   const [infoAlert, setInfoAlert] = useState('');
   const [errorAlert, setErrorAlert] = useState('');
   const [warningAlert, setWarningAlert] = useState('');
+  const EventList = React.lazy(() => import('./EventList'));
 
   const fetchData = async () => {
     const allEvents = await getEvents();
@@ -82,7 +84,9 @@ const Tab = () => {
               <NumberOfEvents setCurrentNOE={setCurrentNOE}
                 setErrorAlert={setErrorAlert} />
             </div>
-            <EventList events={events} />
+            <Suspense fallback={<div>Loading...</div>}>
+              <EventList events={events} />
+            </Suspense>
           </div>
         )}
         {activeTab === 'tab2' && (
