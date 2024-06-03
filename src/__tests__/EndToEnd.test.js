@@ -5,7 +5,7 @@ describe('show/hide an event details', () => {
   let page;
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       slowMo: 250, // slow down by 250ms,
       timeout: 0 // removes any puppeteer/browser timeout limitations (this isn't the same as the timeout of jest)
     });
@@ -42,7 +42,7 @@ describe('filter Events By City', () => {
   let page;
   beforeAll(async () => {
     browser = await puppeteer.launch({
-      headless: false,
+      headless: true,
       slowMo: 250, // slow down by 250ms,
       timeout: 0 // removes any puppeteer/browser timeout limitations (this isn't the same as the timeout of jest)
     });

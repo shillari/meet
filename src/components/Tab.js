@@ -1,6 +1,7 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { getEvents, extractLocations } from '../api';
-//import EventList from './EventList';
+import EventList from './EventList';
+import CityEventsChart from './CityEventsChart';
 
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
@@ -22,7 +23,6 @@ const Tab = () => {
   const [infoAlert, setInfoAlert] = useState('');
   const [errorAlert, setErrorAlert] = useState('');
   const [warningAlert, setWarningAlert] = useState('');
-  const EventList = React.lazy(() => import('./EventList'));
 
   const fetchData = async () => {
     const allEvents = await getEvents();
@@ -67,31 +67,29 @@ const Tab = () => {
         </button>
       </div>
       <div className="tab-content">
+        <button onClick={handleFilterClick} className='filter-button'>Filter {filter ? <IoIosArrowUp /> : <IoIosArrowDown />}</button>
+        <div className={filter ? 'filter-options active' : 'filter-options inactive'} data-testid="filter-div">
+          <div className="alerts-container">
+            {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
+          </div>
+          <CitySearch allLocations={allLocations}
+            setCurrentCity={setCurrentCity}
+            setInfoAlert={setInfoAlert}
+          />
+          <div className="alerts-container">
+            {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
+          </div>
+          <NumberOfEvents setCurrentNOE={setCurrentNOE}
+            setErrorAlert={setErrorAlert} />
+        </div>
         {activeTab === 'tab1' && (
           <div className="tab-pane active" id="tab1">
-            <button onClick={handleFilterClick} className='filter-button'>Filter {filter ? <IoIosArrowUp /> : <IoIosArrowDown />}</button>
-            <div className={filter ? 'filter-options active' : 'filter-options inactive'} data-testid="filter-div">
-              <div className="alerts-container">
-                {infoAlert.length ? <InfoAlert text={infoAlert} /> : null}
-              </div>
-              <CitySearch allLocations={allLocations}
-                setCurrentCity={setCurrentCity}
-                setInfoAlert={setInfoAlert}
-              />
-              <div className="alerts-container">
-                {errorAlert.length ? <ErrorAlert text={errorAlert} /> : null}
-              </div>
-              <NumberOfEvents setCurrentNOE={setCurrentNOE}
-                setErrorAlert={setErrorAlert} />
-            </div>
-            <Suspense fallback={<div>Loading...</div>}>
-              <EventList events={events} />
-            </Suspense>
+            <EventList events={events} />
           </div>
         )}
         {activeTab === 'tab2' && (
           <div className="tab-pane active" id="tab2">
-            <h2>Coming soon...</h2>
+            <CityEventsChart allLocations={allLocations} events={events} />
           </div>
         )}
       </div>

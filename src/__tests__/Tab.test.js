@@ -5,7 +5,14 @@ import userEvent from '@testing-library/user-event';
 import { getEvents } from '../api';
 import Tab from '../components/Tab';
 
+class ResizeObserver {
+  observe() { }
+  unobserve() { }
+  disconnect() { }
+}
+
 describe('<Tab /> component', () => {
+  window.ResizeObserver = ResizeObserver;
   let tabComponent;
   beforeEach(() => {
     tabComponent = render(<Tab />).container.firstChild;
