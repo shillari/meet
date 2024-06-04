@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { getEvents, extractLocations } from '../api';
 import EventList from './EventList';
 import CityEventsChart from './CityEventsChart';
+import EventGenreChart from './EventGenreChart';
 
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
@@ -89,7 +90,10 @@ const Tab = () => {
         )}
         {activeTab === 'tab2' && (
           <div className="tab-pane active" id="tab2">
-            <CityEventsChart allLocations={allLocations} events={events} />
+            <div className='charts-container'>
+              <EventGenreChart events={events} />
+              <CityEventsChart allLocations={allLocations} events={events} />
+            </div>
           </div>
         )}
       </div>
