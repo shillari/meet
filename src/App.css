@@ -264,13 +264,18 @@ input[type="number"] {
 .charts-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
-
 }
 
 .recharts-default-tooltip {
   background-color: var(--secondary-color) !important;
   border-radius: 10px !important;
   padding: 2px !important;
+}
+
+.recharts-legend-item {
+  background-color: transparent !important;
+  margin: 5px !important;
+  padding: 10px;
 }
 
 @keyframes show_details {
