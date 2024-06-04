@@ -54,7 +54,7 @@ const EventGenreChart = ({ events }) => {
             ))
           }
         </Pie>
-        <Tooltip />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
         <Legend />
       </PieChart>
 
