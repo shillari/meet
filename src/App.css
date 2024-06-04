@@ -266,10 +266,11 @@ input[type="number"] {
   grid-template-columns: 1fr 1fr;
 }
 
-.recharts-default-tooltip {
-  background-color: var(--secondary-color) !important;
-  border-radius: 10px !important;
-  padding: 2px !important;
+.custom-tooltip {
+  background-color: var(--secondary-color);
+  border-radius: 10px;
+  padding: 10px ;
+  border: 1px solid #ccc;
 }
 
 .recharts-legend-item {

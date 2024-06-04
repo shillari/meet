@@ -1,6 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { PieChart, Pie, ResponsiveContainer, Tooltip, Cell, Legend, Text } from "recharts";
 
+const CustomTooltip = ({ active, payload }) => {
+  if (active && payload && payload.length) {
+    return (
+      <div className="custom-tooltip">
+        <p>{`${payload[0].payload.name} : ${payload[0].payload.value}`}</p>
+      </div>
+    );
+  }
+
+  return null;
+};
+
 const EventGenreChart = ({ events }) => {
   const [data, setData] = useState([]);
   const genres = ['React', 'JavaScript', 'Node', 'jQuery', 'Angular'];
@@ -57,13 +69,12 @@ const EventGenreChart = ({ events }) => {
             ))
           }
         </Pie>
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} label={''} />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip />} />
         <Legend />
       </PieChart>
 
     </ResponsiveContainer>
   );
 }
-
 
 export default EventGenreChart;
