@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { PieChart, Pie, ResponsiveContainer, Tooltip, Cell, Legend } from "recharts";
+import { PieChart, Pie, ResponsiveContainer, Tooltip, Cell, Legend, Text } from "recharts";
 
 const EventGenreChart = ({ events }) => {
   const [data, setData] = useState([]);
@@ -25,15 +25,18 @@ const EventGenreChart = ({ events }) => {
     const x = cx + radius * Math.cos(-midAngle * RADIAN) * 1.07;
     const y = cy + radius * Math.sin(-midAngle * RADIAN) * 1.07;
     return percent ? (
-      <text
-        x={x}
-        y={y}
-        fill="#333"
-        textAnchor={x > cx ? 'start' : 'end'}
-        dominantBaseline="central"
-      >
-        {`${genres[index]} ${(percent * 100).toFixed(0)}%`}
-      </text>
+      <>
+        <Text
+          x={x}
+          y={y}
+          fill="#000"
+          textAnchor={'middle'}
+          dominantBaseline="central"
+          fontSize={13}
+        >
+          {`${genres[index]} ${(percent * 100).toFixed(0)}%`}
+        </Text>
+      </>
     ) : null;
   };
 
@@ -54,7 +57,7 @@ const EventGenreChart = ({ events }) => {
             ))
           }
         </Pie>
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} label={''} />
         <Legend />
       </PieChart>
 
