@@ -25,16 +25,16 @@ const CityEventsChart = ({ allLocations, events }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    setData(getData());
-  }, [`${events}`]);
+    const getData = () => {
+      return allLocations.map((location) => {
+        const count = events.filter((event) => event.location.toUpperCase() === location.toUpperCase()).length;
+        const city = location.split((/, | - /))[0];
+        return { city, count };
+      });
+    };
 
-  const getData = () => {
-    return allLocations.map((location) => {
-      const count = events.filter((event) => event.location.toUpperCase() === location.toUpperCase()).length;
-      const city = location.split((/, | - /))[0];
-      return { city, count };
-    });
-  };
+    setData(getData());
+  }, [events]);
 
   return (
     <ResponsiveContainer width="99%" height={450}>
